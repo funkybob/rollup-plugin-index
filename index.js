@@ -24,8 +24,9 @@ export default function Index(options ={}) {
       stripBlanks(html)
       stripBlanks(head)
 
-      for(let name in bundle) {
-        if (name.endsWith('.js')) {
+      for(let chunk of bundle) {
+        if (!(chunk.isAsset || chunk.isEntry)) continue;
+        if (chunk.fileName.endsWith('.js')) {
           head.childNodes.push({
             tagName: 'script',
             attrs: [
