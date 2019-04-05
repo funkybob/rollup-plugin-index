@@ -6,7 +6,7 @@
   "module": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -i src/index.js -f esm -o index.js -e fs,path,parse5",
+    "build": "rollup -i src/index.js -f common -o index.js -e fs,path,parse5",
     "prepare": "npm run build"
   },
   "keywords": [

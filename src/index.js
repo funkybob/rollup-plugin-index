@@ -24,7 +24,8 @@ export default function Index(options ={}) {
       stripBlanks(html)
       stripBlanks(head)
 
-      for(let chunk of bundle) {
+      for(let name in bundle) {
+	let chunk = bundle[name];
         if (!(chunk.isAsset || chunk.isEntry)) continue;
         if (chunk.fileName.endsWith('.js')) {
           head.childNodes.push({
