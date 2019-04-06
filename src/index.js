@@ -7,7 +7,7 @@ function stripBlanks (el) {
 }
 
 export default function Index(options ={}) {
-  const { source } = options;
+  const { source, compact } = options;
 
   return {
     name: 'index',
@@ -21,8 +21,10 @@ export default function Index(options ={}) {
       let head = html.childNodes.find(el => el.nodeName === 'head')
 
       // Strip #text nodes
-      stripBlanks(html)
-      stripBlanks(head)
+      if(compact) {
+        stripBlanks(html)
+        stripBlanks(head)
+      }
 
       for(let name in bundle) {
 	let chunk = bundle[name];
