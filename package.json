@@ -6,7 +6,7 @@
   "module": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -i src/index.js -f common -o index.js -e fs,path,parse5",
+    "build": "rollup -c",
     "prepare": "npm run build"
   },
   "keywords": [
@@ -18,6 +18,8 @@
     "parse5": "^5.1.0"
   },
   "devDependencies": {
-    "rollup": "^1.1.2"
+    "rollup": "^1.9.0",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.1.0"
   }
 }
