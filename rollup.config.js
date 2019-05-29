@@ -8,7 +8,7 @@ export default {
 		'path',
 	],
 	output: {
-		file: 'index.js',
+		file: 'dist/index.js',
 		format: 'commonjs'
 	},
 	plugins: [

@@ -2,8 +2,8 @@
   "name": "rollup-plugin-index",
   "version": "1.0.0",
   "description": "Rollup plugin to inject script and link tags into a HTML template.",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
