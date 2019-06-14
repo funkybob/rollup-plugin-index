@@ -7,7 +7,7 @@ function stripBlanks (el) {
 }
 
 export default function Index(options ={}) {
-  const { source, compact } = options;
+  const { source, compact, target } = options;
 
   return {
     name: 'index',
@@ -49,8 +49,14 @@ export default function Index(options ={}) {
       }
 
       let output = serialize(dom);
+
       let targetDir = (options.dir) ? options.dir : path.dirname(options.file);
-      fs.writeFileSync(path.join(targetDir, source), output)
+      let targetFile = path.join(targetDir, (target || path.basename(source)));
+
+      // ensure the target dir exists
+      fs.mkdirSync(path.dirname(targetFile), {recursive: true});
+
+      fs.writeFileSync(targetFile, output)
     }
   }
 }

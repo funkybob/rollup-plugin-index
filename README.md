@@ -18,7 +18,10 @@ Add to the plugins section of your rollup.config.js:
         format: 'es'
       },
       plugins: [
-        Index({source: 'index.html'})
+        Index({
+          source: 'index.html',
+          compact: true
+        })
       ]
     }
 
@@ -35,7 +38,6 @@ Add to the plugins section of your rollup.config.js:
       </body>
     </html>
 
-
 # Generate!
 
     $ npx rollup -c
@@ -46,4 +48,20 @@ And you should find something like this in `dist/index.html`:
       <h1> Whoa! </h1>
     </body></html>
 
-Note that it removes text nodes that are children of <html> and <head>.
+Since ``compact`` was set, all text nodes that are direct children of <html> and <head> are removed.
+
+# Options
+
+source::
+
+    Template to use
+
+compact:: (Default: false)
+
+    Should remove text node children from <html> and <head>.
+
+target::
+
+    Filename / path to write output to.
+    If not specified, it will use the basename of the source file.
+
