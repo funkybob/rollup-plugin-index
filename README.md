@@ -31,7 +31,7 @@ Add to the plugins section of your rollup.config.js:
     <!DOCTYPE html>
     <html>
       <head>
-        <title> My Site </title>
+        <title> My Site! </title>
       </head>
       <body>
         <h1> Whoa! </h1>
@@ -44,7 +44,7 @@ Add to the plugins section of your rollup.config.js:
 
 And you should find something like this in `dist/index.html`:
 
-    <!DOCTYPE html><html><head><title> My Brilliant Site! </title><script type="module" src="bundle.js"></script></head><body class="test">
+    <!DOCTYPE html><html><head><title> My Site! </title><script type="module" src="bundle.js"></script></head><body>
       <h1> Whoa! </h1>
     </body></html>
 
