@@ -45,7 +45,7 @@ export default function Index({ source, compact, target }) {
         trimBlanks(body);
       }
 
-      Object.entries(bundle).forEach((name, chunk) => {
+      Object.entries(bundle).forEach(([name, chunk]) => {
         if (!(chunk.isAsset || chunk.isEntry)) return;
         if (chunk.fileName.endsWith('.js')) {
           head.childNodes.push({
