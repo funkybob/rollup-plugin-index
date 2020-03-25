@@ -44,11 +44,9 @@ Add to the plugins section of your rollup.config.js:
 
 And you should find something like this in `dist/index.html`:
 
-    <!DOCTYPE html><html><head><title> My Site! </title><script type="module" src="bundle.js"></script></head><body>
-      <h1> Whoa! </h1>
-    </body></html>
+    <!DOCTYPE html><html><head><title> My Site! </title><script type="module" src="bundle.js"></script></head><body> <h1> Whoa! </h1> </body></html>
 
-Since ``compact`` was set, all text nodes that are direct children of <html> and <head> are removed.
+Since ``compact`` was set, all text nodes that are direct children of <html> and <head> are removed, and all text nodes in <body> will be trimmed.
 
 # Options
 
