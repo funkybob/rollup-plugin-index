@@ -1,62 +1,80 @@
-import * as fs from 'fs'
+import * as fs from 'fs';
 import * as path from 'path';
-import {parse, serialize} from 'parse5'
+import { parse, serialize } from 'parse5';
 
-function stripBlanks (el) {
-    el.childNodes = el.childNodes.filter(e => e.nodeName !== '#text')
+/**
+ * Strip all #text nodes from the element.
+ */
+function stripBlanks(el) {
+  /* eslint-disable-next-line no-param-reassign */
+  el.childNodes = el.childNodes.filter((e) => e.nodeName !== '#text');
 }
 
-export default function Index(options ={}) {
-  const { source, compact, target } = options;
+/**
+ * Recursively trim #text nodes.
+ */
+function trimBlanks(el) {
+  el.childNodes.forEach((e) => {
+    if (e.nodeName === '#text') {
+      e.value = e.value.trim() || ' ';
+    } else {
+      trimBlanks(e);
+    }
+  });
+}
 
+export default function Index({ source, compact, target }) {
   return {
     name: 'index',
-    generateBundle: (options, bundle, isWrite) => {
-
-      let data = fs.readFileSync(source, {encoding: 'utf8'})
-      let dom = parse(data)
+    buildStart() {
+      this.addWatchFile(source);
+    },
+    generateBundle(options, bundle) {
+      const data = fs.readFileSync(source, { encoding: 'utf8' });
+      const dom = parse(data);
 
       // It _should_ be: [DOCTYPE, html[head]]
-      let html = dom.childNodes.find(el => el.nodeName === 'html')
-      let head = html.childNodes.find(el => el.nodeName === 'head')
+      const html = dom.childNodes.find((el) => el.nodeName === 'html');
+      const head = html.childNodes.find((el) => el.nodeName === 'head');
+      const body = html.childNodes.find((el) => el.nodeName === 'body');
 
       // Strip #text nodes
-      if(compact) {
-        stripBlanks(html)
-        stripBlanks(head)
+      if (compact) {
+        stripBlanks(html);
+        stripBlanks(head);
+        trimBlanks(body);
       }
 
-      for(let name in bundle) {
-	let chunk = bundle[name];
-        if (!(chunk.isAsset || chunk.isEntry)) continue;
+      Object.entries(bundle).forEach((name, chunk) => {
+        if (!(chunk.isAsset || chunk.isEntry)) return;
         if (chunk.fileName.endsWith('.js')) {
           head.childNodes.push({
             tagName: 'script',
             attrs: [
-              {name: 'type', value: 'module'},
-              {name: 'src', value: name}
-            ]
-          })
+              { name: 'type', value: 'module' },
+              { name: 'src', value: name },
+            ],
+          });
         } else if (name.endsWith('.css')) {
           head.childNodes.push({
             tagName: 'link',
             attrs: [
-              {name: 'rel', value: 'stylesheet'},
-              {name: 'href', value: name}
-            ]
-          })
+              { name: 'rel', value: 'stylesheet' },
+              { name: 'href', value: name },
+            ],
+          });
         }
-      }
+      });
 
-      let output = serialize(dom);
+      const output = serialize(dom);
 
-      let targetDir = (options.dir) ? options.dir : path.dirname(options.file);
-      let targetFile = path.join(targetDir, (target || path.basename(source)));
+      const targetFile = target || path.basename(source);
 
-      // ensure the target dir exists
-      fs.mkdirSync(path.dirname(targetFile), {recursive: true});
-
-      fs.writeFileSync(targetFile, output)
-    }
-  }
+      this.emitFile({
+        type: 'asset',
+        source: output,
+        fileName: targetFile,
+      });
+    },
+  };
 }
