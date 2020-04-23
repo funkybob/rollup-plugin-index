@@ -7,13 +7,14 @@ import { parse, serialize } from 'parse5';
  */
 function stripBlanks(el) {
   /* eslint-disable-next-line no-param-reassign */
-  el.childNodes = el.childNodes.filter((e) => e.nodeName !== '#text');
+  el.childNodes = el.childNodes.filter((e) => (e.nodeName !== '#text' && e.nodeName !== '#comment'));
 }
 
 /**
  * Recursively trim #text nodes.
  */
 function trimBlanks(el) {
+  if (!el.childNodes) return;
   el.childNodes.forEach((e) => {
     if (e.nodeName === '#text') {
       e.value = e.value.trim() || ' ';
