@@ -47,7 +47,7 @@ export default function Index({ source, compact, target }) {
       }
 
       Object.entries(bundle).forEach(([name, chunk]) => {
-        if (!(chunk.isAsset || chunk.isEntry)) return;
+        if (!(chunk.type === 'asset' || chunk.isEntry)) return;
         if (chunk.fileName.endsWith('.js')) {
           head.childNodes.push({
             tagName: 'script',
