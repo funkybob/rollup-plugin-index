@@ -10,6 +10,8 @@
     "prepare": "npm run build"
   },
   "keywords": [
+    "rollup",
+    "plugin",
     "rollup-plugin"
   ],
   "author": "Curtis Maloney",
