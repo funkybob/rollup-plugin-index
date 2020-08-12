@@ -1,3 +1,5 @@
+import pkg from './package.json';
+
 import resolve from 'rollup-plugin-node-resolve';
 import common from 'rollup-plugin-commonjs';
 import {terser} from 'rollup-plugin-terser';
@@ -10,10 +12,10 @@ export default {
 		'fs',
 		'path',
 	],
-	output: {
-		file: 'dist/index.js',
-		format: 'commonjs'
-	},
+	output: [
+		{ file: pkg.main, format: 'cjs' },
+		{ file: pkg.module, format: 'es' },
+	],
 	plugins: [
 		resolve(),
 		common(),
