@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-index",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Rollup plugin to inject script and link tags into a HTML template.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
