@@ -17,15 +17,16 @@
   "author": "Curtis Maloney",
   "license": "ISC",
   "dependencies": {
-    "parse5": "^6.0.1"
+    "eslit": "^6.0.0",
+    "parse5": "^7.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.6.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "rollup": "^2.23.1",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-node-resolve": "^5.0.2",
-    "rollup-plugin-terser": "^7.0.0"
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "rollup": "^2.78.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }

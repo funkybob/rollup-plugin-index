@@ -13,7 +13,7 @@ export default {
 		'path',
 	],
 	output: [
-		{ file: pkg.main, format: 'cjs' },
+		{ file: pkg.main, format: 'cjs', exports: 'auto' },
 		{ file: pkg.module, format: 'es' },
 	],
 	plugins: [
@@ -27,7 +27,7 @@ export default {
 				passes: 2,
 			},
 			output: {
-				beautify: false
+				beautify: !production,
 			}
 		}),
 
